@@ -42,7 +42,7 @@ export class Box {
         else {
             this.boxCategory = BoxCategory.XL;
             this.cost = SizePrice.XL;
-            if (this.weight > SizeWeight.small) {
+            if (this.weight > SizeWeight.XL) {
                 this.cost += (this.weight - SizeWeight.XL) * StandardOverWeightModifier
             }
         }

@@ -37,59 +37,48 @@ function getCostOfBoxes(order: Order) {
 // Get the largest discount
 function getDiscounts(order: Order) {
     // keeping track of which boxes are being tracked for discounts
-    let mixedPackageDiscount: Box[] = [];
-    let smallPackageDiscount: Box[] = [];
-    let mediumPackageDiscount: Box[] = [];
+    let mixedPackageDiscount: Box[] = order.boxList.filter((a) => a.boxCategory != BoxCategory.Small && a.boxCategory != BoxCategory.Medium);
+    let smallPackageDiscount: Box[] = order.boxList.filter((a) => a.boxCategory == BoxCategory.Small).sort((a, b) => b.cost! - a.cost!);
+    let mediumPackageDiscount: Box[] = order.boxList.filter((a) => a.boxCategory == BoxCategory.Medium).sort((a,b) => b.cost! - a.cost!);
 
-    // Loop through every box to figure out the discounts
-    for (let i = 0; i < order.boxList.length; i++) {
-        // Add this box to the correct categories
-
-        mixedPackageDiscount.push(order.boxList[i]);
-        if (order.boxList[i].boxCategory == BoxCategory.Small) {
-            smallPackageDiscount.push(order.boxList[i]);
-        }
-        if (order.boxList[i].boxCategory == BoxCategory.Medium) {
-            mediumPackageDiscount.push(order.boxList[i]);
-        }
-
-        // If there are four small packages, you are eligible for a discount
-        if (smallPackageDiscount.length == 4) {
+    // Check the small package discounts possible
+    let start = 0;
+    for (let i = 0; i < smallPackageDiscount.length; i++) {
+        if ((i - start) == 3) {
             order.discounts.push({
                 discountType: DiscountType.SmallDiscount,
-                savings: smallPackageDiscount.reduce(function (prev, curr) {
-                    return prev.cost! < curr.cost! ? prev : curr;
-                }).cost!
+                savings: smallPackageDiscount[i].cost!
             });
-            // remove all packages from being considered for future discounts
-            mixedPackageDiscount = mixedPackageDiscount.filter(a => !smallPackageDiscount.includes(a));
-            smallPackageDiscount = []
+            start = i + 1;
         }
+    }
+    mixedPackageDiscount = mixedPackageDiscount.concat(smallPackageDiscount.slice(start));
 
-        // If there are 3 medium  packages you are eligible for a discount
-        if (mediumPackageDiscount.length == 3) {
+    // check medium package discounts possible
+    start = 0
+    for (let i = 0; i < mediumPackageDiscount.length; i++) {
+        if ((i - start) == 2) {
             order.discounts.push({
                 discountType: DiscountType.MediumDiscount,
-                savings: mediumPackageDiscount.reduce(function (prev, curr) {
-                    return prev.cost! < curr.cost! ? prev : curr;
-                }).cost!
+                savings: mediumPackageDiscount[i].cost!
             });
-            // remove all packages from being considered for future discounts
-            mixedPackageDiscount = mixedPackageDiscount.filter(a => !mediumPackageDiscount.includes(a));
-            mediumPackageDiscount = []
+            start = i + 1;
         }
+    }
+    mixedPackageDiscount = mixedPackageDiscount.concat(mediumPackageDiscount.slice(start));
 
-        if (mixedPackageDiscount.length == 5) {
+
+    // Sort then get the most out of the mixed package set
+    mixedPackageDiscount.sort((a, b) => b.cost! - a.cost!);
+    console.log(mixedPackageDiscount);
+    start = 0
+    for (let i = 0; i < mixedPackageDiscount.length; i++) {
+        if ((i - start) == 4) {
             order.discounts.push({
                 discountType: DiscountType.MixedDiscount,
-                savings: mixedPackageDiscount.reduce(function (prev, curr) {
-                    return prev.cost! < curr.cost! ? prev : curr;
-                }).cost!
+                savings: mixedPackageDiscount[i].cost!
             });
-            // remove all packages from being considered for future discounts
-            smallPackageDiscount = [];
-            mediumPackageDiscount = [];
-            mixedPackageDiscount = [];
+            start = i + 1;
         }
     }
 

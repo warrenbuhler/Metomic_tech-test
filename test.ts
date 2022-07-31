@@ -134,7 +134,7 @@ printOrderSummary(orderFive);
 // resetting test cases to get two discounts
 testSizesOne = [5, 3, 2]; // small 
 testWeightOne = 1;
-testSizesTwo = [5, 8, 5]; // small
+testSizesTwo = [120, 8, 5]; // XL
 testWeightTwo = 2
 testSizesThree = [1, 2, 3]; // small
 testWeightThree = 10; // Overweight box
@@ -144,11 +144,11 @@ testSizesFive = [40, 3, 1]; // everything below is mixed
 testWeightFive = 1;
 let testSizesSix = [100, 3, 1];
 let testWeightSix = 1;
-let testSizesSeven = [1, 3, 1];
+let testSizesSeven = [1, 3, 1]; // small
 let testWeightSeven = 1;
 let testSizesEight = [40, 3, 1];
 let testWeightEight = 1;
-let testSizesNine = [120, 3, 1];
+let testSizesNine = [5, 3, 1]; // small
 let testWeightNine = 1;
 
 

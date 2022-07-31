@@ -47,17 +47,14 @@ The spirit of this change is to prevent over the top weight charges by letting u
 
 
 ## Thoughts on phase 5
-Due to time constraints, I will take any discount as soon as it is available. This may let users game the system.
-* Ie, you can game the system by entering 5 heavy boxes, get a discount on a heavy box, then entering 2 small boxes.
+Due to time constraints, I can get the list of all small boxes, sort them by cost descending, then take every fourth box as a discount. I can do the same with medium boxes, then do the same with all unused boxes. 
 
 By "each parcel can only be used in a discount once", I assume that means any package used in completing a discount set is no longer counted for any other set 
 * If you have 6 parcels and four are small, I assume you can apply the 4 small package discount but not also the 5 package discount as the four initial packages were already counted. 
 
 I need to store an array of completed discounts on the order. 
 
-Since order appears to matter, I can simply move forward and apply discounts as soon as one is possible. If order does not matter, I would need to track what the maximum possible discount as I traverse through the list of boxes. Then return the maximum possible discount at the end of the array.
-
 
 ## Other things I would do
-I'd like to change the discount calculation so that order does not matter in calculating the maximum possible discount. This would be possible using a dynamic programming approach and keeping track of the maximum possible discount with each added box.
+I'd like to change the discount calculation to be more efficient. Right now I do a lot of filtering and sorting, and there is likely a dynamic programming approach that would be faster and more efficient.
 In a real life scenario, we would probably have the user filling in boxes in real time and the order would need to continuosly update with the best discounts and total price. 
