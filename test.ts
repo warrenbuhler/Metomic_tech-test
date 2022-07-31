@@ -1,38 +1,59 @@
-/**
- * THIS IS GENERATED CODE. Quality unknown.
- *
- * GPT-3 input:
- *   "Generate a typescript file that solves tech test './README.md'"
- *
- *  GPT-3 output: wat. I tried.
- */
+import { Box } from "./box";
+import { SizeCategory } from "./enums";
+import { printOrderSummary, Order, getTotalCost } from "./order";
 
-type Box = {
-  size: 'medium' | 'small'
-  dimensions: number[]
-  cost?: number
-  discount?: number
+// Test inputs 
+let testSizesOne = [5, 3, 2];
+let testSizesTwo = [12, 8, 5];
+let testSizesThree = [51, 2, 3];
+
+
+// Test case 1
+console.log("TEST CASE 1\n")
+
+console.log("Inputs");
+console.log("\tDimensions of box 1: " + testSizesOne);
+console.log("\tDimensions of box 2: " + testSizesTwo);
+console.log("\n")
+
+let boxListOne: Box[] = [new Box(testSizesOne), new Box(testSizesTwo)];
+if (boxListOne[0].sizeCategory != 0) {
+    console.log("Box size is incorrect. Box should be a Small box but is " + SizeCategory[boxListOne[0].sizeCategory!]);
 }
 
-function getCostOfBox(box:Box): number{
-  return box.size === "small" ? 3 : 5
+if (boxListOne[1].sizeCategory != 1) {
+    console.log("Box size is incorrect. Box should be a Medium box but is " + SizeCategory[boxListOne[1].sizeCategory!]);
 }
 
-function calculateCosts(boxes:Box[]) {
-  const boxesWithCosts = boxes.map(box => {
-    return {
-      ...box,
-      cost: getCostOfBox(box)
-    }
-  })
+let orderOne = new Order(boxListOne);
+getTotalCost(orderOne);
 
-  return {
-    total: boxesWithCosts.reduce((a,b) => a+b.cost, 0),
-    lineItems: boxesWithCosts
-  }
+if (orderOne.totalCost != 11) {
+    console.log("Incorrect price estimation: value should be 11 but value returned was " + orderOne.totalCost);
 }
 
+printOrderSummary(orderOne);
 
-const inputs : Box[] = [{ size: 'small', dimensions: [5,3,2] }, {size: 'medium', dimensions: [12,8,5]}]
-console.log("Cost of boxes:")
-console.log(calculateCosts(inputs))
+
+// Test Case 2 
+console.log("\nTEST CASE 2\n")
+console.log("Inputs");
+console.log("\tDimensions of box 1: " + testSizesOne);
+console.log("\tDimensions of box 2: " + testSizesTwo);
+console.log("\tDimensions of box 3: " + testSizesThree);
+console.log("\n")
+
+let boxListTwo: Box[] = [new Box(testSizesOne), new Box(testSizesTwo), new Box(testSizesThree)];
+
+if (boxListTwo[2].sizeCategory != 2) {
+    console.log("Box size is incorrect. Box should be a Large box but is " + SizeCategory[boxListOne[2].sizeCategory!]);
+}
+
+let orderTwo = new Order(boxListTwo);
+getTotalCost(orderTwo);
+
+if (orderTwo.totalCost != 26) {
+    console.log("Incorrect price estimation: value should be 26 but value returned was " + orderTwo.totalCost);
+}
+
+printOrderSummary(orderTwo);

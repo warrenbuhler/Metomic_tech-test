@@ -1,4 +1,6 @@
 # Little boxes on the hillside
+See WB_README for instructions to run and recorded thoughts
+
 _Medium and large ones too._
 
 You work for a courier company. They've just discovered you can code and now corporate's gone afuzz with demands to save their failing cost-calculation department who keep accidentally sending parcels to customers for negative money.
