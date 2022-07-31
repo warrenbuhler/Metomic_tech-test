@@ -1,6 +1,6 @@
 import { Box } from "./box";
 import { SpeedyShippingModifier } from "./consts";
-import { SizeCategory } from "./enums";
+import { BoxCategory } from "./enums";
 
 
 // Used to define the order in question
@@ -44,7 +44,7 @@ export function printOrderSummary(order: Order) {
     console.log("\tPricing Breakdown:")
     let num = 1;
     order.boxList.forEach((box) => {
-        console.log("\t\tBox " + num + " is a " + SizeCategory[box.sizeCategory!] + " box with weight of " + box.weight + "kg and costs " + box.cost + " pounds");
+        console.log("\t\tBox " + num + " is a " + BoxCategory[box.boxCategory!] + " box with weight of " + box.weight + "kg and costs " + box.cost + " pounds");
         num++;
     })
 

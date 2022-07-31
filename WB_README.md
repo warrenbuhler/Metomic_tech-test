@@ -37,3 +37,12 @@ Boxes now need to be created with an additional parameter for weight. The weight
 Should store weight limits in my enums file.
 Moving SpeedyShipping Modifier and OverWeightModifier into a consts file. In future iterations, you may wish to have the ability to change these on the fly (like during a special sale). In that case, you could have a private backing variable and allow only certain users to change it on the fly via an API call.
 
+## Thoughts on phase 4
+The name of "Heavy" doesn't fit exactly as a category in the enum named SizeCategory. I can modify that quickly to BoxType. If we had real data, we would have to consider whether that was worth migrating older data to the new model or accept the slightly odd naming.
+
+There is no instructions on whether I should determine if a box should be a "heavy category" or if the user must select it. IE, if a user enters a small box that weighs 50 pounds, do they need to select the "heavy box" option? Or do we determine that for them? 
+If there was a front end, we could prompt the user when the price would be cheaper by selecting the option for heavy box. 
+
+The spirit of this change is to prevent over the top weight charges by letting users pick "heavy boxes". So I could automatically select that a box should be heavy when the cost would be cheaper that way.
+
+

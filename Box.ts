@@ -1,10 +1,9 @@
-import { SizeCategory, SizeDimensions, SizePrice, SizeWeight } from "./enums";
-import { OverWeightModifier } from "./consts";
+import { BoxCategory, SizeDimensions, SizePrice, SizeWeight } from "./enums";
+import { HeavyOverWeightModifier, StandardOverWeightModifier } from "./consts";
 
 // Class for Boxes
-
 export class Box {
-    sizeCategory ?: SizeCategory;
+    boxCategory ?: BoxCategory;
     dimensions: number[];
     cost?: number;
     weight: number;
@@ -19,32 +18,39 @@ export class Box {
     getBoxSizeCategoryAndPrice() {
         let largestSize = Math.max(...this.dimensions);
         if (largestSize < SizeDimensions.small) {
-            this.sizeCategory = SizeCategory.Small;
+            this.boxCategory = BoxCategory.Small;
             this.cost = SizePrice.small;
             if (this.weight > SizeWeight.small) {
-                this.cost += (this.weight - SizeWeight.small) * OverWeightModifier;
+                this.cost += (this.weight - SizeWeight.small) * StandardOverWeightModifier;
             }
         }
         else if (largestSize < SizeDimensions.medium) {
-            this.sizeCategory = SizeCategory.Medium;
+            this.boxCategory = BoxCategory.Medium;
             this.cost = SizePrice.medium;
             if (this.weight > SizeWeight.medium) {
-                this.cost += (this.weight - SizeWeight.medium) * OverWeightModifier;
+                this.cost += (this.weight - SizeWeight.medium) * StandardOverWeightModifier;
             }
         }
         else if (largestSize < SizeDimensions.large) {
-            this.sizeCategory = SizeCategory.Large;
+            this.boxCategory = BoxCategory.Large;
             this.cost = SizePrice.large;
             if (this.weight > SizeWeight.large) {
-                this.cost += (this.weight - SizeWeight.large) * OverWeightModifier;
+                this.cost += (this.weight - SizeWeight.large) * StandardOverWeightModifier;
             }
         }
         else {
-            this.sizeCategory = SizeCategory.XL;
+            this.boxCategory = BoxCategory.XL;
             this.cost = SizePrice.XL;
             if (this.weight > SizeWeight.small) {
-                this.cost += (this.weight - SizeWeight.XL) * OverWeightModifier
+                this.cost += (this.weight - SizeWeight.XL) * StandardOverWeightModifier
             }
+        }
+
+        // check if a box should instead be marked as a heavy box
+
+        if (this.cost > (SizePrice.heavy + Math.max(0,(this.weight - SizeWeight.heavy) * HeavyOverWeightModifier))){
+            this.boxCategory = BoxCategory.Heavy;
+            this.cost = SizePrice.heavy + Math.max(0,(this.weight - SizeWeight.heavy) * HeavyOverWeightModifier);
         }
     }
 }
