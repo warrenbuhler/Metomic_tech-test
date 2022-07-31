@@ -28,3 +28,9 @@ export enum SizeWeight {
     XL = 10,
     heavy = 50
 }
+
+export enum DiscountType {
+    SmallDiscount,
+    MediumDiscount,
+    MixedDiscount,
+}

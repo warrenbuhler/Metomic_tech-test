@@ -12,10 +12,11 @@ export class Box {
     constructor(dim: number[], weight: number) {
         this.dimensions = dim;
         this.weight = weight;
-        this.getBoxSizeCategoryAndPrice();
+        this.getBoxCategoryAndPrice();
     }
 
-    getBoxSizeCategoryAndPrice() {
+    // Get the type of the box and the correct price
+    getBoxCategoryAndPrice() {
         let largestSize = Math.max(...this.dimensions);
         if (largestSize < SizeDimensions.small) {
             this.boxCategory = BoxCategory.Small;
@@ -47,7 +48,6 @@ export class Box {
         }
 
         // check if a box should instead be marked as a heavy box
-
         if (this.cost > (SizePrice.heavy + Math.max(0,(this.weight - SizeWeight.heavy) * HeavyOverWeightModifier))){
             this.boxCategory = BoxCategory.Heavy;
             this.cost = SizePrice.heavy + Math.max(0,(this.weight - SizeWeight.heavy) * HeavyOverWeightModifier);
