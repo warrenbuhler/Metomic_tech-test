@@ -16,5 +16,12 @@ export enum SizePrice {
     small = 3,
     medium = 8,
     large = 15,
-    XL = 25 // Adding for later checks
+    XL = 25 
+}
+
+export enum SizeWeight {
+    small = 1,
+    medium = 3,
+    large = 6,
+    XL = 10 
 }

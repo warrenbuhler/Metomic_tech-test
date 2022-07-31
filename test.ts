@@ -4,8 +4,11 @@ import { printOrderSummary, Order, getCostOfOrder } from "./order";
 
 // Test inputs 
 let testSizesOne = [5, 3, 2];
+let testWeightOne = 1;
 let testSizesTwo = [12, 8, 5];
+let testWeightTwo = 2
 let testSizesThree = [51, 2, 3];
+let testWeightThree = 10; // Overweight box
 
 
 // Test case 1
@@ -16,7 +19,7 @@ console.log("\tDimensions of box 1: " + testSizesOne);
 console.log("\tDimensions of box 2: " + testSizesTwo);
 console.log("\n")
 
-let boxListOne: Box[] = [new Box(testSizesOne), new Box(testSizesTwo)];
+let boxListOne: Box[] = [new Box(testSizesOne, testWeightOne), new Box(testSizesTwo, testWeightTwo)];
 if (boxListOne[0].sizeCategory != 0) {
     console.log("Box size is incorrect. Box should be a Small box but is " + SizeCategory[boxListOne[0].sizeCategory!]);
 }
@@ -43,7 +46,7 @@ console.log("\tDimensions of box 2: " + testSizesTwo);
 console.log("\tDimensions of box 3: " + testSizesThree);
 console.log("\n")
 
-let boxListTwo: Box[] = [new Box(testSizesOne), new Box(testSizesTwo), new Box(testSizesThree)];
+let boxListTwo: Box[] = [new Box(testSizesOne, testWeightOne), new Box(testSizesTwo, testWeightTwo), new Box(testSizesThree, testWeightThree)];
 
 if (boxListTwo[2].sizeCategory != 2) {
     console.log("Box size is incorrect. Box should be a Large box but is " + SizeCategory[boxListOne[2].sizeCategory!]);
@@ -70,7 +73,7 @@ console.log("\n");
 let orderThree = new Order(boxListTwo, true);
 getCostOfOrder(orderThree);
 
-if (orderThree.costOfOrder != 52) {
+if (orderThree.costOfOrder != 68) {
     console.log("Incorrect price estimation: value should be 52 but value returned was " + orderThree.costOfOrder);
 }
 

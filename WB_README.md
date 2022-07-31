@@ -32,3 +32,8 @@ For reporting purposes, I like storing the cost of the boxes at the moment in th
 There is an arguement for storing the Speedy Shipping multiplier on the Order as well. Or alternatively, a  generic seperate "costOfAddons" property. This could help with future reporting and statistical analysis on the most profitable addons, however that is outside the scope and timeframe for this assignment.
 
 
+## Thoughts on phase 3:
+Boxes now need to be created with an additional parameter for weight. The weight will factor into the cost of that box.
+Should store weight limits in my enums file.
+Moving SpeedyShipping Modifier and OverWeightModifier into a consts file. In future iterations, you may wish to have the ability to change these on the fly (like during a special sale). In that case, you could have a private backing variable and allow only certain users to change it on the fly via an API call.
+

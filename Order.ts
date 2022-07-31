@@ -1,7 +1,7 @@
 import { Box } from "./box";
+import { SpeedyShippingModifier } from "./consts";
 import { SizeCategory } from "./enums";
 
-const SpeedyShippingModifier = 2;
 
 // Used to define the order in question
 export class Order {
@@ -44,7 +44,7 @@ export function printOrderSummary(order: Order) {
     console.log("\tPricing Breakdown:")
     let num = 1;
     order.boxList.forEach((box) => {
-        console.log("\t\tBox " + num + " is a " + SizeCategory[box.sizeCategory!] + " box and costs " + box.cost + " pounds");
+        console.log("\t\tBox " + num + " is a " + SizeCategory[box.sizeCategory!] + " box with weight of " + box.weight + "kg and costs " + box.cost + " pounds");
         num++;
     })
 
