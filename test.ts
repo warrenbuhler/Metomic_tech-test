@@ -1,6 +1,6 @@
 import { Box } from "./box";
 import { SizeCategory } from "./enums";
-import { printOrderSummary, Order, getTotalCost } from "./order";
+import { printOrderSummary, Order, getCostOfOrder } from "./order";
 
 // Test inputs 
 let testSizesOne = [5, 3, 2];
@@ -25,11 +25,11 @@ if (boxListOne[1].sizeCategory != 1) {
     console.log("Box size is incorrect. Box should be a Medium box but is " + SizeCategory[boxListOne[1].sizeCategory!]);
 }
 
-let orderOne = new Order(boxListOne);
-getTotalCost(orderOne);
+let orderOne = new Order(boxListOne, false);
+getCostOfOrder(orderOne);
 
-if (orderOne.totalCost != 11) {
-    console.log("Incorrect price estimation: value should be 11 but value returned was " + orderOne.totalCost);
+if (orderOne.costOfOrder != 11) {
+    console.log("Incorrect price estimation: value should be 11 but value returned was " + orderOne.costOfOrder);
 }
 
 printOrderSummary(orderOne);
@@ -49,11 +49,29 @@ if (boxListTwo[2].sizeCategory != 2) {
     console.log("Box size is incorrect. Box should be a Large box but is " + SizeCategory[boxListOne[2].sizeCategory!]);
 }
 
-let orderTwo = new Order(boxListTwo);
-getTotalCost(orderTwo);
+let orderTwo = new Order(boxListTwo, false);
+getCostOfOrder(orderTwo);
 
-if (orderTwo.totalCost != 26) {
-    console.log("Incorrect price estimation: value should be 26 but value returned was " + orderTwo.totalCost);
+if (orderTwo.costOfOrder != 26) {
+    console.log("Incorrect price estimation: value should be 26 but value returned was " + orderTwo.costOfOrder);
 }
 
 printOrderSummary(orderTwo);
+
+
+console.log("\nTEST CASE 3\n")
+console.log("Inputs");
+console.log("\tDimensions of box 1: " + testSizesOne);
+console.log("\tDimensions of box 2: " + testSizesTwo);
+console.log("\tDimensions of box 3: " + testSizesThree);
+console.log("\tSpeedy Shipping selected!");
+console.log("\n");
+
+let orderThree = new Order(boxListTwo, true);
+getCostOfOrder(orderThree);
+
+if (orderThree.costOfOrder != 52) {
+    console.log("Incorrect price estimation: value should be 52 but value returned was " + orderThree.costOfOrder);
+}
+
+printOrderSummary(orderThree);

@@ -23,3 +23,12 @@ Example output
 		Box [#] is a [size] box and costs [cost] pounds
 		Box [#] is a [size] box and costs [cost] pounds
 
+
+## Thoughts phase 2:
+Speedy shipping should be defined and stored on the Order class. 
+Order should have a total price of all boxes stored. Then another price second price given addons or discounts
+
+For reporting purposes, I like storing the cost of the boxes at the moment in the Order object and then seperately storing the final price of the Order. 
+There is an arguement for storing the Speedy Shipping multiplier on the Order as well. Or alternatively, a  generic seperate "costOfAddons" property. This could help with future reporting and statistical analysis on the most profitable addons, however that is outside the scope and timeframe for this assignment.
+
+
